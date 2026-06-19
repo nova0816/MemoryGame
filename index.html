@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Auto clear cache / Disable browser caching -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <title>Cute Animal Memory Game - Learn to Read!</title>
+    <meta name="description" content="An interactive, cute 5x4 memory match game designed for kids to learn animal words. Match cartoon animals with their names and listen to pronunciations.">
+    <link rel="stylesheet" href="styles.css?v=1.1.2">
+    <!-- Google Fonts: Fredoka for super cute rounded bubbly text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Start Screen Overlay -->
+    <div class="start-screen" id="start-screen">
+        <div class="start-content">
+            <div class="start-logo">🐾🦒🦁🐾</div>
+            <h1 class="start-title">Cute Animal Match!</h1>
+            <p class="start-subtitle">Find the pairs! Match the cartoon picture with its written name and learn to read! 🔊✨</p>
+            
+            <button class="btn btn-start" id="btn-start" aria-label="Start Game">
+                🚀 Play Game! 🚀
+            </button>
+            
+            <div class="start-footer">
+                <button class="version-tag" id="btn-changelog" aria-label="View Version History">v1.1.2 (What's New?)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Container (Game Page) -->
+    <div class="app-container hidden" id="app-container">
+        <header class="game-header">
+            <h1 class="game-title" id="game-title">Cute Animal Match! 🐾</h1>
+            <p class="game-subtitle">Match the animal image with its written name!</p>
+            
+            <div class="stats-panel" id="stats-panel">
+                <div class="stat-box" id="stat-matches">
+                    <span class="stat-label">Matches</span>
+                    <span class="stat-value" id="matches-count">0/10</span>
+                </div>
+                <div class="stat-box" id="stat-flips">
+                    <span class="stat-label">Flips</span>
+                    <span class="stat-value" id="flips-count">0</span>
+                </div>
+                <button class="btn btn-reset" id="btn-reset" aria-label="Restart Game">
+                    <span class="btn-icon">🔄</span> Restart
+                </button>
+            </div>
+            
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-bar-fill"></div>
+            </div>
+        </header>
+
+        <main class="game-main">
+            <!-- 5x4 Game Grid -->
+            <div class="game-grid" id="game-grid" role="grid" aria-label="Memory Game Board">
+                <!-- Cards will be dynamically inserted here by JavaScript -->
+            </div>
+        </main>
+
+        <footer class="game-footer">
+            <p>Tap the cards with pictures 🔊 to hear the word, then find its name match! ✨</p>
+        </footer>
+    </div>
+
+    <!-- Victory Modal -->
+    <div class="modal-overlay" id="victory-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <div class="modal-emoji">🎉🏆🎉</div>
+            <h2 id="modal-title">Super Job!</h2>
+            <p>You matched all the animals and learned their names!</p>
+            <div class="modal-stats">
+                <p>Total Flips: <strong id="modal-flips">0</strong></p>
+            </div>
+            <button class="btn btn-play-again" id="btn-play-again">
+                ✨ Play Again! ✨
+            </button>
+        </div>
+    </div>
+
+    <!-- Changelog (Version History) Modal -->
+    <div class="modal-overlay" id="changelog-modal" role="dialog" aria-modal="true" aria-labelledby="changelog-title">
+        <div class="modal-content">
+            <h2 id="changelog-title">Changelog & History</h2>
+            
+            <div class="changelog-content">
+                <div class="changelog-version">
+                    <span>v1.1.2 (Latest)</span>
+                    <span>2026-06-19</span>
+                </div>
+                <ul class="changelog-list">
+                    <li>Added HTTP Cache-Control meta tags to force browser cache clearing on page refresh.</li>
+                    <li>Removed `max-width: 100%` restriction from `.card-word span` to allow overflow measurement for the auto-sizing font algorithm.</li>
+                </ul>
+
+                <div class="changelog-version">
+                    <span>v1.1.1</span>
+                    <span>2026-06-19</span>
+                </div>
+                <ul class="changelog-list">
+                    <li>Added a cute Start Page overlay.</li>
+                    <li>Added version history panel.</li>
+                    <li>Wrapped card words in a nested inline span to strictly disable browser text breaks.</li>
+                    <li>Improved font-size recalculation calculations using relative element dimensions to fit words in exactly one line (fixes Elephant / Monkey wraps).</li>
+                </ul>
+
+                <div class="changelog-version">
+                    <span>v1.0.0</span>
+                    <span>2026-06-19</span>
+                </div>
+                <ul class="changelog-list">
+                    <li>Initial release of the 5x4 HTML5 Memory Game.</li>
+                    <li>Speech synthesis voice playback when clicking animal cartoon cards.</li>
+                    <li>No voice playback when clicking written word cards.</li>
+                    <li>Synthesized Audio effects (flip pop, match chime, mismatch buzz, win fanfare).</li>
+                    <li>Confetti party on matching all cards.</li>
+                </ul>
+            </div>
+
+            <button class="btn btn-close-changelog" id="btn-close-changelog">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Load JavaScript -->
+    <script src="app.js?v=1.1.2"></script>
+</body>
+</html>
