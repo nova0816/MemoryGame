@@ -163,6 +163,22 @@ function handleCardClick(cardElement, cardData) {
     // Play card flip sound
     playSound('flip');
     
+    // Calculate card translation to shift it towards the screen center when zoomed
+    const rect = cardElement.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const centerX = viewportWidth / 2;
+    const centerY = viewportHeight / 2;
+    const cardCenterX = rect.left + rect.width / 2;
+    const cardCenterY = rect.top + rect.height / 2;
+    
+    // Shift the card 45% of the distance towards the screen center to prevent viewport clipping at 2x scale
+    const translateX = (centerX - cardCenterX) * 0.45;
+    const translateY = (centerY - cardCenterY) * 0.45;
+    
+    cardElement.style.setProperty('--translate-x', `${translateX}px`);
+    cardElement.style.setProperty('--translate-y', `${translateY}px`);
+    
     // Flip and zoom card
     cardElement.classList.add('flipped', 'zoomed');
     setTimeout(() => {

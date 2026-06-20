@@ -236,8 +236,8 @@ body {
     z-index: 10;
 }
 .card-container.zoomed .card-inner {
-    transform: rotateY(180deg) scale(1.28);
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.16);
+    transform: translate(var(--translate-x, 0px), var(--translate-y, 0px)) rotateY(180deg) scale(2.0) !important;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
 }
 
 /* Matched State */

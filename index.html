@@ -11,7 +11,7 @@
     
     <title>Cute Animal Memory Game - Learn to Read!</title>
     <meta name="description" content="An interactive, cute 5x4 memory match game designed for kids to learn animal words. Match cartoon animals with their names and listen to pronunciations.">
-    <link rel="stylesheet" href="styles.css?v=1.1.7">
+    <link rel="stylesheet" href="styles.css?v=1.1.8">
     <!-- Google Fonts: Fredoka for super cute rounded bubbly text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +30,7 @@
             </button>
             
             <div class="start-footer">
-                <button class="version-tag" id="btn-changelog" aria-label="View Version History">v1.1.7 (What's New?)</button>
+                <button class="version-tag" id="btn-changelog" aria-label="View Version History">v1.1.8 (What's New?)</button>
             </div>
         </div>
     </div>
@@ -94,11 +94,20 @@
             
             <div class="changelog-content">
                 <div class="changelog-version">
-                    <span>v1.1.7 (Latest)</span>
+                    <span>v1.1.8 (Latest)</span>
                     <span>2026-06-20</span>
                 </div>
                 <ul class="changelog-list">
-                    <li>Added temporary Zoom Pop-out effect: clicking/flipping a card zooms it in by 28% for 1 second before settling back, helping kids read and see the cards easily.</li>
+                    <li>Increased card click zoom scale to 2x (double size) to ensure maximum readability and accessibility for children.</li>
+                    <li>Implemented dynamic viewport centering offsets: when a card zooms, its position is calculated relative to the screen center, and it is translated 45% towards the center. This completely prevents cards on the screen borders from being cut off or trimmed.</li>
+                </ul>
+
+                <div class="changelog-version">
+                    <span>v1.1.7</span>
+                    <span>2026-06-20</span>
+                </div>
+                <ul class="changelog-list">
+                    <li>Added temporary Zoom Pop-out effect: clicking/flipping a card zooms it in by 28% for 1 second before settling back.</li>
                     <li>Tightened screen margins and grid layout gaps on mobile devices (body padding: 4px, container padding: 8px, grid gap: 6px) to maximize card dimensions.</li>
                 </ul>
 
@@ -179,6 +188,6 @@
     </div>
 
     <!-- Load JavaScript -->
-    <script src="app.js?v=1.1.7"></script>
+    <script src="app.js?v=1.1.8"></script>
 </body>
 </html>
