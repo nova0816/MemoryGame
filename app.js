@@ -243,24 +243,42 @@ function updateStatsUI() {
 // Text-to-Speech Engine
 function speakAnimalName(name) {
     if ('speechSynthesis' in window) {
-        // Cancel active speaking to avoid overlap
-        window.speechSynthesis.cancel();
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        // Android Chrome cancel() bug: calling cancel() before speak() can freeze/silence the engine on mobile.
+        // Only cancel on desktop if speaking.
+        if (!isMobile && window.speechSynthesis.speaking) {
+            window.speechSynthesis.cancel();
+        }
         
         const utterance = new SpeechSynthesisUtterance(name);
-        const voices = window.speechSynthesis.getVoices();
         
-        // Find natural English child-friendly/clear voice
-        let selectedVoice = voices.find(voice => voice.lang.includes('en-US') && voice.name.includes('Google'));
-        if (!selectedVoice) {
-            selectedVoice = voices.find(voice => voice.lang.startsWith('en'));
+        // Force speech synthesis to resume if paused (common mobile browser bug)
+        if (window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+        }
+
+        if (!isMobile) {
+            const voices = window.speechSynthesis.getVoices();
+            // Find natural English voice for desktop
+            let selectedVoice = voices.find(voice => voice.lang.includes('en-US') && voice.name.includes('Google'));
+            if (!selectedVoice) {
+                selectedVoice = voices.find(voice => voice.lang.startsWith('en'));
+            }
+            if (selectedVoice) {
+                utterance.voice = selectedVoice;
+            }
+            
+            utterance.pitch = 1.35; // Cute kid-like voice pitch on desktop
+            utterance.rate = 0.85;  // Slightly slower rate for desktop clarity
+        } else {
+            // On mobile, leave utterance.voice empty so it falls back to the system's
+            // default working voice (avoids cloud voice offline silence bugs).
+            // Also keep standard pitch/rate to ensure system engine compatibility.
+            utterance.pitch = 1.0;
+            utterance.rate = 1.0;
         }
         
-        if (selectedVoice) {
-            utterance.voice = selectedVoice;
-        }
-        
-        utterance.pitch = 1.35; // Cute kid-like voice pitch
-        utterance.rate = 0.85;  // Slightly slower rate for clarity
         utterance.volume = 1.0;
         
         window.speechSynthesis.speak(utterance);

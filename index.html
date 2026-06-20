@@ -11,7 +11,7 @@
     
     <title>Cute Animal Memory Game - Learn to Read!</title>
     <meta name="description" content="An interactive, cute 5x4 memory match game designed for kids to learn animal words. Match cartoon animals with their names and listen to pronunciations.">
-    <link rel="stylesheet" href="styles.css?v=1.1.2">
+    <link rel="stylesheet" href="styles.css?v=1.1.3">
     <!-- Google Fonts: Fredoka for super cute rounded bubbly text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +30,7 @@
             </button>
             
             <div class="start-footer">
-                <button class="version-tag" id="btn-changelog" aria-label="View Version History">v1.1.2 (What's New?)</button>
+                <button class="version-tag" id="btn-changelog" aria-label="View Version History">v1.1.3 (What's New?)</button>
             </div>
         </div>
     </div>
@@ -94,7 +94,18 @@
             
             <div class="changelog-content">
                 <div class="changelog-version">
-                    <span>v1.1.2 (Latest)</span>
+                    <span>v1.1.3 (Latest)</span>
+                    <span>2026-06-20</span>
+                </div>
+                <ul class="changelog-list">
+                    <li>Fixed silent text-to-speech playback on mobile/Android browsers.</li>
+                    <li>Disabled the browser `.cancel()` method on mobile devices to prevent the Google TTS engine queue from freezing.</li>
+                    <li>Removed remote cloud voice overrides on mobile to prevent silent failures when offline voice packs are missing, falling back to the user's active system voice.</li>
+                    <li>Fixed mobile-specific pitch/rate compatibility.</li>
+                </ul>
+
+                <div class="changelog-version">
+                    <span>v1.1.2</span>
                     <span>2026-06-19</span>
                 </div>
                 <ul class="changelog-list">
@@ -133,6 +144,6 @@
     </div>
 
     <!-- Load JavaScript -->
-    <script src="app.js?v=1.1.2"></script>
+    <script src="app.js?v=1.1.3"></script>
 </body>
 </html>
