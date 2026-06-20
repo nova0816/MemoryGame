@@ -240,6 +240,9 @@ function updateStatsUI() {
     progressBarFill.style.width = `${progressPercent}%`;
 }
 
+// Create a global list to hold active utterances and prevent garbage collection on mobile
+window.activeUtterances = [];
+
 // Text-to-Speech Engine
 function speakAnimalName(name) {
     if ('speechSynthesis' in window) {
@@ -252,6 +255,22 @@ function speakAnimalName(name) {
         }
         
         const utterance = new SpeechSynthesisUtterance(name);
+        
+        // Enforce English language explicitly (essential for Android Chrome routing)
+        utterance.lang = 'en-US';
+        
+        // Store utterance in a global array to prevent mobile garbage collection
+        window.activeUtterances.push(utterance);
+        
+        const cleanUpUtterance = () => {
+            const index = window.activeUtterances.indexOf(utterance);
+            if (index > -1) {
+                window.activeUtterances.splice(index, 1);
+            }
+        };
+        
+        utterance.onend = cleanUpUtterance;
+        utterance.onerror = cleanUpUtterance;
         
         // Force speech synthesis to resume if paused (common mobile browser bug)
         if (window.speechSynthesis.paused) {

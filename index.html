@@ -11,7 +11,7 @@
     
     <title>Cute Animal Memory Game - Learn to Read!</title>
     <meta name="description" content="An interactive, cute 5x4 memory match game designed for kids to learn animal words. Match cartoon animals with their names and listen to pronunciations.">
-    <link rel="stylesheet" href="styles.css?v=1.1.3">
+    <link rel="stylesheet" href="styles.css?v=1.1.4">
     <!-- Google Fonts: Fredoka for super cute rounded bubbly text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +30,7 @@
             </button>
             
             <div class="start-footer">
-                <button class="version-tag" id="btn-changelog" aria-label="View Version History">v1.1.3 (What's New?)</button>
+                <button class="version-tag" id="btn-changelog" aria-label="View Version History">v1.1.4 (What's New?)</button>
             </div>
         </div>
     </div>
@@ -94,14 +94,22 @@
             
             <div class="changelog-content">
                 <div class="changelog-version">
-                    <span>v1.1.3 (Latest)</span>
+                    <span>v1.1.4 (Latest)</span>
                     <span>2026-06-20</span>
                 </div>
                 <ul class="changelog-list">
-                    <li>Fixed silent text-to-speech playback on mobile/Android browsers.</li>
-                    <li>Disabled the browser `.cancel()` method on mobile devices to prevent the Google TTS engine queue from freezing.</li>
-                    <li>Removed remote cloud voice overrides on mobile to prevent silent failures when offline voice packs are missing, falling back to the user's active system voice.</li>
-                    <li>Fixed mobile-specific pitch/rate compatibility.</li>
+                    <li>Fixed mobile/Android garbage collection bug where the SpeechSynthesisUtterance object was aggressively cleaned up by the engine, cutting off speech before it played. Saved active utterances to a persistent global list (`window.activeUtterances`).</li>
+                    <li>Explicitly defined `utterance.lang = 'en-US'` to ensure consistent system-level Text-To-Speech routing on Android Chrome.</li>
+                </ul>
+
+                <div class="changelog-version">
+                    <span>v1.1.3</span>
+                    <span>2026-06-20</span>
+                </div>
+                <ul class="changelog-list">
+                    <li>Disabled standard `.cancel()` calls on mobile browsers to prevent the Google TTS engine queue from freezing.</li>
+                    <li>Forced fallback to default local English system voice on mobile, bypassing cloud voice downloads.</li>
+                    <li>Added `window.speechSynthesis.resume()` before speaking.</li>
                 </ul>
 
                 <div class="changelog-version">
@@ -118,10 +126,9 @@
                     <span>2026-06-19</span>
                 </div>
                 <ul class="changelog-list">
-                    <li>Added a cute Start Page overlay.</li>
-                    <li>Added version history panel.</li>
+                    <li>Added a cute Start Page overlay with version history panel.</li>
                     <li>Wrapped card words in a nested inline span to strictly disable browser text breaks.</li>
-                    <li>Improved font-size recalculation calculations using relative element dimensions to fit words in exactly one line (fixes Elephant / Monkey wraps).</li>
+                    <li>Improved font-size recalculation to fit words on exactly one line.</li>
                 </ul>
 
                 <div class="changelog-version">
@@ -144,6 +151,6 @@
     </div>
 
     <!-- Load JavaScript -->
-    <script src="app.js?v=1.1.3"></script>
+    <script src="app.js?v=1.1.4"></script>
 </body>
 </html>
