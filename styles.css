@@ -231,6 +231,15 @@ body {
     transform: rotateY(180deg);
 }
 
+/* Zoomed-in pop state on click */
+.card-container.zoomed {
+    z-index: 10;
+}
+.card-container.zoomed .card-inner {
+    transform: rotateY(180deg) scale(1.28);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.16);
+}
+
 /* Matched State */
 .card-container.matched {
     cursor: default;
@@ -542,10 +551,20 @@ body {
 }
 
 @media (max-width: 580px) {
+    body {
+        padding: 4px !important;
+    }
+    
+    .app-container {
+        padding: 8px !important;
+        gap: 8px !important;
+        border-radius: var(--border-radius-md) !important;
+    }
+    
     /* Responsive layout change for tall mobile screens: 4 columns instead of 5 */
     .game-grid {
         grid-template-columns: repeat(4, 1fr);
-        gap: 8px;
+        gap: 6px;
     }
     
     .card-face {

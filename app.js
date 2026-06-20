@@ -163,8 +163,11 @@ function handleCardClick(cardElement, cardData) {
     // Play card flip sound
     playSound('flip');
     
-    // Flip card
-    cardElement.classList.add('flipped');
+    // Flip and zoom card
+    cardElement.classList.add('flipped', 'zoomed');
+    setTimeout(() => {
+        cardElement.classList.remove('zoomed');
+    }, 1000);
     
     // Voice playback: ONLY for image cards
     if (cardData.type === 'image') {
