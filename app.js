@@ -449,7 +449,7 @@ function adjustWordFontSizes() {
         // Reset inner span size so we measure its natural stylesheet-based size
         span.style.fontSize = '';
         
-        const maxAllowedWidth = card.clientWidth - 12; // 12px for safe horizontal padding
+        const maxAllowedWidth = card.clientWidth - 8; // 8px for safe horizontal padding (4px on each side)
         let fontSize = parseFloat(window.getComputedStyle(span).fontSize);
         
         // span has white-space: nowrap and display: inline-block,
