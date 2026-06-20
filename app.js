@@ -131,7 +131,7 @@ const TOPICS = {
             { name: 'puzzle', label: 'Puzzle', emoji: '🧩' },
             { name: 'toy train', label: 'Toy Train', emoji: '🚂' },
             { name: 'drum', label: 'Drum', emoji: '🥁' },
-            { name: 'tricycle', label: 'Tricycle', emoji: '🚲' },
+            { name: 'bicycle', label: 'Bicycle', emoji: '🚲' },
             { name: 'paint', label: 'Paint', emoji: '🎨' }
         ]
     },
