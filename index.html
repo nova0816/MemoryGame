@@ -9,28 +9,76 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     
-    <title>Cute Animal Memory Game - Learn to Read!</title>
+    <title>Cute Memory Match - Learn to Read!</title>
     <meta name="description" content="An interactive, cute 5x4 memory match game designed for kids to learn animal words. Match cartoon animals with their names and listen to pronunciations.">
-    <link rel="stylesheet" href="styles.css?v=1.1.8">
+    <link rel="stylesheet" href="styles.css?v=1.1.9">
     <!-- Google Fonts: Fredoka for super cute rounded bubbly text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Start Screen Overlay -->
+    <!-- Start Screen Overlay (Topic Selection) -->
     <div class="start-screen" id="start-screen">
         <div class="start-content">
-            <div class="start-logo">🐾🦒🦁🐾</div>
-            <h1 class="start-title">Cute Animal Match!</h1>
-            <p class="start-subtitle">Find the pairs! Match the cartoon picture with its written name and learn to read! 🔊✨</p>
+            <div class="start-logo">🌟🧸🎨🌟</div>
+            <h1 class="start-title">Cute Match!</h1>
+            <p class="start-subtitle">Choose a topic to start matching and learning! 🔊✨</p>
             
-            <button class="btn btn-start" id="btn-start" aria-label="Start Game">
-                🚀 Play Game! 🚀
-            </button>
+            <!-- Topic Selection Grid -->
+            <div class="topic-grid" id="topic-grid">
+                <button class="topic-card" data-topic="animals" aria-label="Animals topic">
+                    <span class="topic-icon">🦁</span>
+                    <span class="topic-name">Animals</span>
+                </button>
+                <button class="topic-card" data-topic="colors" aria-label="Colors topic">
+                    <span class="topic-icon">🎨</span>
+                    <span class="topic-name">Colors</span>
+                </button>
+                <button class="topic-card" data-topic="fruits" aria-label="Fruits topic">
+                    <span class="topic-icon">🍎</span>
+                    <span class="topic-name">Fruits</span>
+                </button>
+                <button class="topic-card" data-topic="shapes" aria-label="Shapes topic">
+                    <span class="topic-icon">📐</span>
+                    <span class="topic-name">Shapes</span>
+                </button>
+                <button class="topic-card" data-topic="kitchen" aria-label="Kitchen items topic">
+                    <span class="topic-icon">🍳</span>
+                    <span class="topic-name">Kitchen</span>
+                </button>
+                <button class="topic-card" data-topic="toilet" aria-label="Toilet items topic">
+                    <span class="topic-icon">🧼</span>
+                    <span class="topic-name">Bathroom</span>
+                </button>
+                <button class="topic-card" data-topic="livingroom" aria-label="Living room items topic">
+                    <span class="topic-icon">🛋️</span>
+                    <span class="topic-name">Living Room</span>
+                </button>
+                <button class="topic-card" data-topic="school" aria-label="School items topic">
+                    <span class="topic-icon">✏️</span>
+                    <span class="topic-name">School</span>
+                </button>
+                <button class="topic-card" data-topic="kindergarten" aria-label="Kindergarten items topic">
+                    <span class="topic-icon">🧸</span>
+                    <span class="topic-name">Kindergarten</span>
+                </button>
+                <button class="topic-card" data-topic="park" aria-label="Park items topic">
+                    <span class="topic-icon">🌳</span>
+                    <span class="topic-name">The Park</span>
+                </button>
+                <button class="topic-card" data-topic="beach" aria-label="Beach items topic">
+                    <span class="topic-icon">🏖️</span>
+                    <span class="topic-name">The Beach</span>
+                </button>
+                <button class="topic-card" data-topic="restaurant" aria-label="Restaurant items topic">
+                    <span class="topic-icon">🍕</span>
+                    <span class="topic-name">Restaurant</span>
+                </button>
+            </div>
             
             <div class="start-footer">
-                <button class="version-tag" id="btn-changelog" aria-label="View Version History">v1.1.8 (What's New?)</button>
+                <button class="version-tag" id="btn-changelog" aria-label="View Version History">v1.1.9 (What's New?)</button>
             </div>
         </div>
     </div>
@@ -38,8 +86,8 @@
     <!-- App Container (Game Page) -->
     <div class="app-container hidden" id="app-container">
         <header class="game-header">
-            <h1 class="game-title" id="game-title">Cute Animal Match! 🐾</h1>
-            <p class="game-subtitle">Match the animal image with its written name!</p>
+            <h1 class="game-title" id="game-title">Cute Match! 🐾</h1>
+            <p class="game-subtitle" id="game-subtitle">Match the image with its written name!</p>
             
             <div class="stats-panel" id="stats-panel">
                 <div class="stat-box" id="stat-matches">
@@ -51,7 +99,10 @@
                     <span class="stat-value" id="flips-count">0</span>
                 </div>
                 <button class="btn btn-reset" id="btn-reset" aria-label="Restart Game">
-                    <span class="btn-icon">🔄</span> Restart
+                    <span class="btn-icon">🔄</span> Reset
+                </button>
+                <button class="btn btn-home" id="btn-home" aria-label="Go to Home Screen">
+                    <span class="btn-icon">🏡</span> Home
                 </button>
             </div>
             
@@ -77,7 +128,7 @@
         <div class="modal-content">
             <div class="modal-emoji">🎉🏆🎉</div>
             <h2 id="modal-title">Super Job!</h2>
-            <p>You matched all the animals and learned their names!</p>
+            <p>You matched all the items and learned their names!</p>
             <div class="modal-stats">
                 <p>Total Flips: <strong id="modal-flips">0</strong></p>
             </div>
@@ -94,12 +145,24 @@
             
             <div class="changelog-content">
                 <div class="changelog-version">
-                    <span>v1.1.8 (Latest)</span>
+                    <span>v1.1.9 (Latest)</span>
                     <span>2026-06-20</span>
                 </div>
                 <ul class="changelog-list">
-                    <li>Increased card click zoom scale to 2x (double size) to ensure maximum readability and accessibility for children.</li>
-                    <li>Implemented dynamic viewport centering offsets: when a card zooms, its position is calculated relative to the screen center, and it is translated 45% towards the center. This completely prevents cards on the screen borders from being cut off or trimmed.</li>
+                    <li>Added 11 new educational topics: Colors, Fruits, Shapes, Kitchen, Bathroom (Toilet), Living Room, School, Kindergarten, The Park, The Beach, and Restaurant.</li>
+                    <li>Redesigned the Start Screen to support a 12-item category select grid.</li>
+                    <li>Added a "🏡 Home" button to allow kids to change topics easily.</li>
+                    <li>Created glossy color bubbles and inline SVGs with cute smiley faces for Colors and Shapes categories.</li>
+                    <li>Incorporated high-quality vector emojis as card graphics for the other new topics to ensure mobile-compatible, cute stickers.</li>
+                </ul>
+
+                <div class="changelog-version">
+                    <span>v1.1.8</span>
+                    <span>2026-06-20</span>
+                </div>
+                <ul class="changelog-list">
+                    <li>Increased card click zoom scale to 2x (double size) for readability.</li>
+                    <li>Implemented dynamic viewport centering offsets to shift border/corner cards 45% towards the screen center, preventing card trimming at margins.</li>
                 </ul>
 
                 <div class="changelog-version">
@@ -107,8 +170,8 @@
                     <span>2026-06-20</span>
                 </div>
                 <ul class="changelog-list">
-                    <li>Added temporary Zoom Pop-out effect: clicking/flipping a card zooms it in by 28% for 1 second before settling back.</li>
-                    <li>Tightened screen margins and grid layout gaps on mobile devices (body padding: 4px, container padding: 8px, grid gap: 6px) to maximize card dimensions.</li>
+                    <li>Added temporary Zoom Pop-out effect: clicking/flipping a card zooms it in by 28% for 1 second.</li>
+                    <li>Tightened screen margins and grid gaps on mobile.</li>
                 </ul>
 
                 <div class="changelog-version">
@@ -117,55 +180,8 @@
                 </div>
                 <ul class="changelog-list">
                     <li>Fixed mobile layout margins where large white borders compressed inner images and words.</li>
-                    <li>Reduced card-front padding to 4px (2px on mobile) and scaled card-word box to 100% of card size.</li>
-                    <li>Increased cartoon image size constraints to cover 90% of card space.</li>
+                    <li>Reduced card-front padding to 4px and scaled card-word box to 100% of card size.</li>
                     <li>Thinned mobile card borders to 2px.</li>
-                </ul>
-
-                <div class="changelog-version">
-                    <span>v1.1.5</span>
-                    <span>2026-06-20</span>
-                </div>
-                <ul class="changelog-list">
-                    <li>Fixed Firefox grid layout bug where cards containing large images would stretch and display as different sizes than text cards. Lock container sizes via explicit relative-absolute constraints.</li>
-                </ul>
-
-                <div class="changelog-version">
-                    <span>v1.1.4</span>
-                    <span>2026-06-20</span>
-                </div>
-                <ul class="changelog-list">
-                    <li>Fixed mobile/Android garbage collection bug where the SpeechSynthesisUtterance object was aggressively cleaned up by the engine, cutting off speech before it played. Saved active utterances to a persistent global list (`window.activeUtterances`).</li>
-                    <li>Explicitly defined `utterance.lang = 'en-US'` to ensure consistent system-level Text-To-Speech routing on Android Chrome.</li>
-                </ul>
-
-                <div class="changelog-version">
-                    <span>v1.1.3</span>
-                    <span>2026-06-20</span>
-                </div>
-                <ul class="changelog-list">
-                    <li>Disabled standard `.cancel()` calls on mobile browsers to prevent the Google TTS engine queue from freezing.</li>
-                    <li>Forced fallback to default local English system voice on mobile, bypassing cloud voice downloads.</li>
-                    <li>Added `window.speechSynthesis.resume()` before speaking.</li>
-                </ul>
-
-                <div class="changelog-version">
-                    <span>v1.1.2</span>
-                    <span>2026-06-19</span>
-                </div>
-                <ul class="changelog-list">
-                    <li>Added HTTP Cache-Control meta tags to force browser cache clearing on page refresh.</li>
-                    <li>Removed `max-width: 100%` restriction from `.card-word span` to allow overflow measurement for the auto-sizing font algorithm.</li>
-                </ul>
-
-                <div class="changelog-version">
-                    <span>v1.1.1</span>
-                    <span>2026-06-19</span>
-                </div>
-                <ul class="changelog-list">
-                    <li>Added a cute Start Page overlay with version history panel.</li>
-                    <li>Wrapped card words in a nested inline span to strictly disable browser text breaks.</li>
-                    <li>Improved font-size recalculation to fit words on exactly one line.</li>
                 </ul>
 
                 <div class="changelog-version">
@@ -173,11 +189,7 @@
                     <span>2026-06-19</span>
                 </div>
                 <ul class="changelog-list">
-                    <li>Initial release of the 5x4 HTML5 Memory Game.</li>
-                    <li>Speech synthesis voice playback when clicking animal cartoon cards.</li>
-                    <li>No voice playback when clicking written word cards.</li>
-                    <li>Synthesized Audio effects (flip pop, match chime, mismatch buzz, win fanfare).</li>
-                    <li>Confetti party on matching all cards.</li>
+                    <li>Initial release of the 5x4 HTML5 Memory Game with text-to-speech pronunciations.</li>
                 </ul>
             </div>
 
@@ -188,6 +200,6 @@
     </div>
 
     <!-- Load JavaScript -->
-    <script src="app.js?v=1.1.8"></script>
+    <script src="app.js?v=1.1.9"></script>
 </body>
 </html>

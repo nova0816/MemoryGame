@@ -774,3 +774,190 @@ body {
     transform: translateY(-2px);
 }
 
+/* Topic Grid and Selection Screen */
+.topic-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    width: 100%;
+    margin-top: 10px;
+    max-height: 380px;
+    overflow-y: auto;
+    padding: 8px 12px;
+}
+
+.topic-card {
+    font-family: var(--font-family);
+    background: #ffffff;
+    border: 3px solid #fecfef;
+    border-radius: var(--border-radius-md);
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.25);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.03);
+}
+
+.topic-card:hover {
+    transform: translateY(-5px) scale(1.04);
+    border-color: #ec4899;
+    box-shadow: 0 10px 20px rgba(236, 72, 153, 0.15);
+}
+
+.topic-card:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+.topic-icon {
+    font-size: 2.8rem;
+    line-height: 1;
+    transition: transform 0.3s ease;
+}
+
+.topic-card:hover .topic-icon {
+    transform: scale(1.18) rotate(3deg);
+}
+
+.topic-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+/* Home Button styling */
+.btn-home {
+    background-color: #10b981;
+    color: #ffffff;
+    border-bottom: 4px solid #047857;
+}
+
+.btn-home:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-home:active {
+    border-bottom-width: 0;
+    transform: translateY(2px);
+}
+
+/* Color bubble rendering rule */
+.color-bubble {
+    width: 70%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    box-shadow: inset -8px -8px 16px rgba(0,0,0,0.15), 
+                inset 8px 8px 16px rgba(255,255,255,0.7),
+                0 6px 12px rgba(0,0,0,0.08);
+    border: 3px solid #ffffff;
+    transition: transform 0.3s ease;
+}
+
+.card-container:hover .color-bubble {
+    transform: scale(1.08) rotate(5deg);
+}
+
+/* Shapes SVG rendering styles */
+.card-front svg {
+    width: 82%;
+    height: 82%;
+    filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.06));
+    transition: transform 0.3s ease;
+}
+
+.card-container:hover svg {
+    transform: scale(1.08) rotate(-3deg);
+}
+
+/* Emoji cards rendering rule */
+.card-emoji {
+    font-size: 4.2rem;
+    line-height: 1;
+    user-select: none;
+    transition: transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.card-container:hover .card-emoji {
+    transform: scale(1.15) rotate(5deg);
+}
+
+/* Topic screen overlay scrollbar styling */
+.topic-grid::-webkit-scrollbar,
+.changelog-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.topic-grid::-webkit-scrollbar-track,
+.changelog-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 100px;
+}
+
+.topic-grid::-webkit-scrollbar-thumb,
+.changelog-content::-webkit-scrollbar-thumb {
+    background: rgba(236, 72, 153, 0.2);
+    border-radius: 100px;
+}
+
+.topic-grid::-webkit-scrollbar-thumb:hover,
+.changelog-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(236, 72, 153, 0.4);
+}
+
+/* Start screen dimensions overrides */
+.start-screen .start-content {
+    max-width: 750px;
+    width: 95%;
+    padding: 30px 20px;
+}
+
+/* Media Query Adaptations for start grid */
+@media (max-width: 768px) {
+    .topic-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        max-height: 340px;
+    }
+    .topic-icon {
+        font-size: 2.2rem;
+    }
+    .topic-name {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .topic-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        max-height: 320px;
+        padding: 4px;
+    }
+    .start-screen .start-content {
+        padding: 20px 10px;
+    }
+    .start-logo {
+        font-size: 3rem;
+    }
+    .start-title {
+        font-size: 2.2rem;
+    }
+    .topic-icon {
+        font-size: 2rem;
+    }
+    .card-emoji {
+        font-size: 3.2rem;
+    }
+}
+
+
